@@ -420,7 +420,7 @@ char *
 md_getusername()
 {
     static char login[80];
-    char *l = getenv("ROGUENAME");
+    char *l = getenv("ROGUEUSER");
     if ((l == NULL) || (*l == '\0')) {
 #ifdef _WIN32
         LPSTR mybuffer;
