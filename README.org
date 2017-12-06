@@ -1,0 +1,16 @@
+* About
+This repository is mirror of rogue 5.4.4.
+I got source from [[https://web.archive.org/web/20160604014248/http://rogue.rogueforge.net:80/][Web Archive]] and modified a bit.
+* Compile and install
+Just
+#+BEGIN_SRC shell
+./configure
+make
+(sudo) make install
+#+END_SRC
+* What changed from Original
+- modified compile error because of the change in term.h(struct term aka 'TERMINAL' is now hidden unless NCURSES_INTERNALS is declared).
+- You can use an environment variable to set user name. Like,
+#+BEGIN_SRC shell
+env ROGUEUSER='pochi' rogue
+#+END_SRC
