@@ -76,7 +76,7 @@ main(int argc, char **argv, char **envp)
      * check for print-score option
      */
 
-	md_normaluser(); /* we drop any setgid/setuid priveldges here */
+    md_normaluser(); /* we drop any setgid/setuid priveldges here */
 
     if (argc == 2)
     {

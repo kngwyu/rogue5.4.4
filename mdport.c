@@ -420,23 +420,24 @@ char *
 md_getusername()
 {
     static char login[80];
-    char *l = NULL;
+    char *l = getenv("ROGUENAME");
+    if ((l == NULL) || (*l == '\0')) {
 #ifdef _WIN32
-    LPSTR mybuffer;
-    DWORD size = UNLEN + 1;
-    TCHAR buffer[UNLEN + 1];
+        LPSTR mybuffer;
+        DWORD size = UNLEN + 1;
+        TCHAR buffer[UNLEN + 1];
 
-    mybuffer = buffer;
-    GetUserName(mybuffer,&size);
-    l = mybuffer;
+        mybuffer = buffer;
+        GetUserName(mybuffer,&size);
+        l = mybuffer;
 #elif defined(HAVE_GETPWUID)&& !defined(__DJGPP__)
-    struct passwd *pw;
-
-    pw = getpwuid(getuid());
-
-    l = pw->pw_name;
+        struct passwd *pw;
+        
+        pw = getpwuid(getuid());
+        
+        l = pw->pw_name;
 #endif
-
+    }
     if ((l == NULL) || (*l == '\0'))
         if ( (l = getenv("USERNAME")) == NULL )
             if ( (l = getenv("LOGNAME")) == NULL )
@@ -445,7 +446,6 @@ md_getusername()
 
     strncpy(login,l,80);
     login[79] = 0;
-
     return(login);
 }
 
